@@ -12,8 +12,8 @@ def average_return_window
   recent_returns = customer_returns.where('registered_date > ?', 14.days.ago)
   return '-' if recent_returns.empty?
 
-  total_days = recent_returns.sum do |return|
-    (return.registered_date - return.order_date).to_i
+  total_days = recent_returns.sum do |customer_return|
+    (customer_return.registered_date - customer_return.order_date).to_i
   end
 
   total_days / recent_returns.count
