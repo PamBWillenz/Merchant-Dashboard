@@ -12,42 +12,41 @@ CustomerReturn.destroy_all
 Merchant.destroy_all
 
 # Create merchants
-merchant1 = Merchant.create!(name: "Merchant One")
-merchant2 = Merchant.create!(name: "Merchant Two")
+merchants = []
+20.times do |i|
+  merchants << Merchant.create!(name: "Merchant #{i + 1}")
+end
 
-# Create customer returns for merchant1
-customer_return1 = CustomerReturn.create!(
-  order_date: 30.days.ago,
-  registered_date: 15.days.ago,
-  status: "pending",
-  merchant: merchant1
-)
+# Create customer returns and items for each merchant
+merchants.each do |merchant|
+  3.times do 
+    order_date = rand(1..60).days.ago
+    registered_date = order_date + rand(5..25).days
+    customer_return = CustomerReturn.create!(
+      order_date: order_date,
+      registered_date: registered_date,
+      status: %w[pending approved rejected].sample,
+      merchant: merchant
+    )
 
-customer_return2 = CustomerReturn.create!(
-  order_date: 17.days.ago,
-  registered_date: 5.days.ago,
-  status: "approved",
-  merchant: merchant1
-)
+    # Create items for each customer return
+    items = [
+      { name: "Shirt", price: 25.0 },
+      { name: "Pants", price: 40.0 },
+      { name: "Jacket", price: 60.0 },
+      { name: "Shoes", price: 80.0 },
+      { name: "Hat", price: 15.0 },
+      { name: "Scarf", price: 20.0 },
+      { name: "Gloves", price: 10.0 },
+      { name: "Socks", price: 5.0 },
+      { name: "Belt", price: 12.0 },
+      { name: "Tie", price: 18.0 }
+    ]
 
-# Create items for customer_return1
-Item.create!(name: "Jacket", price: 10.0, customer_return: customer_return1)
-Item.create!(name: "Shoes", price: 20.0, customer_return: customer_return1)
-
-# Create items for customer_return2
-Item.create!(name: "Belts", price: 30.0, customer_return: customer_return2)
-Item.create!(name: "Pants", price: 40.0, customer_return: customer_return2)
-
-# Create customer returns for merchant2
-customer_return3 = CustomerReturn.create!(
-  order_date: 25.days.ago,
-  registered_date: 15.days.ago,
-  status: "rejected",
-  merchant: merchant2
-)
-
-# Create items for customer_return3
-Item.create!(name: "Scarves", price: 50.0, customer_return: customer_return3)
-Item.create!(name: "Hats", price: 60.0, customer_return: customer_return3)
+    items.sample(3).each do |item|
+      Item.create!(name: item[:name], price: item[:price], customer_return: customer_return)
+    end
+  end
+end
 
 puts "Seed data created successfully!"

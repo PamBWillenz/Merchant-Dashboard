@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
-      resources :customer_returns, only: [:index, :update]
+      resources :customer_returns, only: [:index, :update] do
+        member do
+          post 'refund'
+        end
+      end
       resources :merchants, only: [:show, :index]
     end
   end
