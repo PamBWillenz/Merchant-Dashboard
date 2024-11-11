@@ -21,7 +21,8 @@ end
 merchants.each do |merchant|
   3.times do 
     order_date = rand(1..60).days.ago
-    registered_date = order_date + rand(5..25).days
+    registered_date = order_date + rand(1..14).days # Ensure registered_date is within 14 days of order_date
+
     customer_return = CustomerReturn.create!(
       order_date: order_date,
       registered_date: registered_date,
