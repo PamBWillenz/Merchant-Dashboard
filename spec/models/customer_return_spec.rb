@@ -1,4 +1,3 @@
-# spec/models/customer_return_spec.rb
 require 'rails_helper'
 
 RSpec.describe CustomerReturn, type: :model do

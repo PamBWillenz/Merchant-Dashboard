@@ -1,4 +1,3 @@
-# spec/controllers/customer_returns_controller_spec.rb
 require 'rails_helper'
 
 RSpec.describe Api::V1::CustomerReturnsController, type: :controller do
