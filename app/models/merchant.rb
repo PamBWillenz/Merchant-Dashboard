@@ -14,10 +14,10 @@ class Merchant < ApplicationRecord
     return '-' if recent_returns.empty?
 
     total_days = recent_returns.sum do |customer_return|
-      (customer_return.registered_date - customer_return.order_date).to_i
+      (customer_return.registered_date.to_date - customer_return.order_date.to_date).to_i # This calculates the difference in days instead of seconds  
     end
 
-    total_days / recent_returns.count
+    total_days / recent_returns.count.to_f # This calculates the average return window in days
   end
   # This method calculates the average return window in days for returns created in the last 14 days. 
   # It calculates the difference in days between the registered_date and order_date for each return and then averages these values.
