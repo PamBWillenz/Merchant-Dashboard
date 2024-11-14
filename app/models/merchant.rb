@@ -21,5 +21,18 @@ class Merchant < ApplicationRecord
   end
   # This method calculates the average return window in days for returns created in the last 14 days. 
   # It calculates the difference in days between the registered_date and order_date for each return and then averages these values.
+  # 
+  def as_json
+    {
+      id: id,
+      name: name,
+      total_return_amount: sum_of_returned_amounts,
+      average_return_window: average_return_window,
+      # customer_returns: customer_returns
+    }    
+    # When we call as_json on ActiveRecord model object, 
+    # it returns json of attributes on model by calling as_json. 
+    # We can override as_json method and add extra attributes, rename keys, add values of methods on object to the json returned.
+  end
 end
 

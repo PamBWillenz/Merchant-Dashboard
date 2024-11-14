@@ -5,6 +5,7 @@ class Api::V1::CustomerReturnsController < ApplicationController
     customer_returns = CustomerReturn.includes(:items).all
     render json: customer_returns.to_json(include: :items)
   end
+  # retrieving data
 
   def update
     if @customer_return.update(customer_return_params)
@@ -13,6 +14,7 @@ class Api::V1::CustomerReturnsController < ApplicationController
       render json: { errors: @customer_return.errors.full_messages }, status: :unprocessable_entity
     end
   end
+  # updating data
 
   def refund
     if @customer_return.update(status: 'refunded')
@@ -21,8 +23,7 @@ class Api::V1::CustomerReturnsController < ApplicationController
       render json: { errors: @customer_return.errors.full_messages }, status: :unprocessable_entity
     end
   end
-
-  private
+# creating new customer return object
 
   def set_customer_return
     @customer_return = CustomerReturn.find(params[:id])
