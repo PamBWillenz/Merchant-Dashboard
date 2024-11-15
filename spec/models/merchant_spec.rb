@@ -20,6 +20,7 @@ RSpec.describe Merchant, type: :model do
       merchant = create(:merchant)
       create(:customer_return, merchant: merchant, order_date: 10.days.ago, registered_date: 5.days.ago)
       create(:customer_return, merchant: merchant, order_date: 20.days.ago, registered_date: 10.days.ago)
+      create(:customer_return, merchant: merchant, order_date: 30.days.ago, registered_date: 20.days.ago)
 
       expect(merchant.average_return_window).to eq(7.5)
     end

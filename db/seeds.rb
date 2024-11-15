@@ -20,7 +20,7 @@ end
 # Create customer returns and items for each merchant
 merchants.each do |merchant|
   3.times do 
-    order_date = rand(1..60).days.ago
+    order_date = rand(1..14).days.ago
     registered_date = order_date + rand(1..14).days # Ensure registered_date is within 14 days of order_date
 
     customer_return = CustomerReturn.create!(
@@ -44,6 +44,25 @@ merchants.each do |merchant|
       { name: "Tie", price: 18.0 }
     ]
 
+    items.sample(3).each do |item|
+      Item.create!(name: item[:name], price: item[:price], customer_return: customer_return)
+    end
+
+
+  # Create additional customer returns with random dates
+    2.times do 
+      order_date = rand(15..60).days.ago
+      registered_date = order_date + rand(1..14).days # Ensure registered_date is within 14 days of order_date
+
+      customer_return = CustomerReturn.create!(
+        order_date: order_date,
+        registered_date: registered_date,
+        status: %w[pending approved rejected].sample,
+        merchant: merchant
+      )
+    end
+
+    # Create items for each customer return
     items.sample(3).each do |item|
       Item.create!(name: item[:name], price: item[:price], customer_return: customer_return)
     end
