@@ -2,9 +2,10 @@ class Api::V1::CustomerReturnsController < ApplicationController
   before_action :set_customer_return, only: [:update, :refund]
 
   def index
-    customer_returns = CustomerReturn.includes(:items).all
+    customer_returns = CustomerReturn.order(:id).includes(:items).all
     render json: customer_returns.to_json(include: :items)
   end
+
   # retrieving data
 
   def update
