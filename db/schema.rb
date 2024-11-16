@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_09_151404) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_16_165156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "customer_returns", force: :cascade do |t|
     t.datetime "order_date"
     t.datetime "registered_date"
-    t.string "status"
     t.bigint "merchant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["merchant_id"], name: "index_customer_returns_on_merchant_id"
   end
 
