@@ -4,9 +4,9 @@ RSpec.describe CustomerReturn, type: :model do
   it { should belong_to(:merchant) }
   it { should have_many(:items) }
 
-  it { should validate_inclusion_of(:status).in_array(%w[pending approved rejected refunded]) }
+  #it { should validate_inclusion_of(:status).in_array(%w[pending approved rejected refunded]) }
   #it { should define_enum_for(:status).with_values(%w[pending approved rejected refunded]) }
-
+  it { should define_enum_for(:status).with_values(pending: 0, approved: 1, rejected: 2, refunded: 3) }
 
   describe 'validations' do
     it 'validates that the return window is within 14 days' do
