@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
+      post 'login', to: 'auth#login'
+      resources :auth, only: [:index]
       resources :customer_returns, only: [:index, :update] do
         member do
           post 'refund'
