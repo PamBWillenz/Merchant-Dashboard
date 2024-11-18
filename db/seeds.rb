@@ -26,7 +26,7 @@ merchants.each do |merchant|
     customer_return = CustomerReturn.create!(
       order_date: order_date,
       registered_date: registered_date,
-      status: %w[pending approved rejected].sample,
+      status: %i[pending approved rejected refunded].sample,
       merchant: merchant
     )
 
@@ -57,7 +57,7 @@ merchants.each do |merchant|
       customer_return = CustomerReturn.create!(
         order_date: order_date,
         registered_date: registered_date,
-        status: %w[pending approved rejected].sample,
+        status: %i[pending approved rejected refunded].sample,
         merchant: merchant
       )
     end
