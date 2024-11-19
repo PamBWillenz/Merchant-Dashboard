@@ -2,7 +2,7 @@ class Merchant < ApplicationRecord
   has_many :customer_returns
   has_many :items, through: :customer_returns
 
-  has_secure_password
+  has_secure_password # This method is used to encrypt the password and store it in the password_digest column
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
 
