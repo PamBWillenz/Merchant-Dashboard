@@ -2,6 +2,10 @@ class Merchant < ApplicationRecord
   has_many :customer_returns
   has_many :items, through: :customer_returns
 
+  has_secure_password
+  validates :email, presence: true, uniqueness: true
+  validates :password_digest, presence: true
+
 
   def sum_of_returned_amounts
     customer_returns.joins(:items).sum('items.price')

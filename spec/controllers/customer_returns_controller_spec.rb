@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe Api::V1::CustomerReturnsController, type: :controller do
   render_views
 
-  let(:user) { create(:user) }
-  let(:token) { JWT.encode({ user_id: user.id }, Rails.application.secrets.secret_key_base) }
+  let(:merchant) { create(:merchant) }
+  let(:password_digest) { 'password' }
+  let(:token) { JWT.encode({ merchant_id: merchant.id }, Rails.application.secrets.secret_key_base) }
   let(:valid_headers) { { 'Authorization' => "Bearer #{token}" } }
 
   describe 'GET #index' do
     it 'returns a success response' do
       request.headers.merge!(valid_headers)
       get :index
-      puts response.body # Add this line to print the response body
       expect(response).to be_successful
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end

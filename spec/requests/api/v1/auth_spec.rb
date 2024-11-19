@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Auth", type: :request do
-  let(:user) { create(:user, email: 'test@example.com', password: 'password') }
+  let(:merchant) { create(:merchant, email: 'test@example.com', password: 'password') }
   let(:token) do
-    post '/api/v1/login', params: { email: user.email, password: user.password }
+    post '/api/v1/login', params: { email: merchant.email, password: merchant.password }
     JSON.parse(response.body)['token']
   end
 

@@ -38,7 +38,7 @@ class Api::V1::CustomerReturnsController < ApplicationController
     token = header.split(' ').last if header
     begin
       decoded = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
-      @current_user = User.find(decoded[0]['user_id'])
+      @merchant_user = Merchant.find(decoded[0]['merchant_id'])
     rescue JWT::DecodeError
       render json: { error: 'Not Authorized' }, status: :unauthorized
     end
