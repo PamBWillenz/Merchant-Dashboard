@@ -18,10 +18,10 @@ class Merchant < ApplicationRecord
       (customer_return.registered_date.to_date - customer_return.order_date.to_date).to_i # This calculates the difference in days instead of seconds  
     end
 
-    average_window = total_days / recent_returns.count.to_f # This calculates the average return window in days
+    average_window = (total_days / recent_returns.count).to_f.round(2) # This calculates the average return window in days
     # puts "Total Days: #{total_days}, Count: #{recent_returns.count}, Average Window: #{average_window}" # Debugging output
 
-    average_window 
+    average_window
   end
   # This method calculates the average return window in days for returns created in the last 14 days. 
   # It calculates the difference in days between the registered_date and order_date for each return and then averages these values.

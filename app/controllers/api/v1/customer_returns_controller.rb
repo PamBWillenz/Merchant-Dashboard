@@ -3,14 +3,14 @@ class Api::V1::CustomerReturnsController < ApplicationController
 
   def index
     customer_returns = CustomerReturn.order(:id).includes(:items).all
-    render json: customer_returns.to_json(include: :items)
+    render json: customer_returns
   end
 
   # retrieving data
 
   def update
     if @customer_return.update(customer_return_params)
-      render json: @customer_return.to_json(include: :items)
+      render json: @customer_return
     else
       render json: { errors: @customer_return.errors.full_messages }, status: :unprocessable_entity
     end
